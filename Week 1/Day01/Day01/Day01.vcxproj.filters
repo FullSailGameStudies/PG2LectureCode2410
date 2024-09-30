@@ -30,7 +30,7 @@
     <ClCompile Include="..\..\..\Shared\Console\Console.cpp">
       <Filter>Console</Filter>
     </ClCompile>
-    <ClCompile Include="DataReader.cpp">
+    <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="..\..\..\Shared\Console\Console.h">
       <Filter>Console</Filter>
     </ClInclude>
-    <ClInclude Include="DataReader.h">
+    <ClInclude Include="Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

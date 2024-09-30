@@ -7,6 +7,7 @@
 #include "Calculator.h"
 #include <Console.h>
 #include <DataReader.h>
+#include <Menu.h>
 
 int AddOne(int localNumber)
 {
@@ -25,7 +26,22 @@ void print(const std::vector<std::string>& names)
 int main()
 {
     Console::ResizeWindow(150, 30);
-    DataReader dataReader;
+
+    Menu burgers;//created an object of the Menu type
+    burgers.AddMenuItem("Chicken Nuggies");
+    burgers.AddMenuItem("Cheese Burger");
+    burgers.AddMenuItem("Fries");
+    burgers.AddMenuItem("Cola");
+    burgers.ShowMenu();
+
+    std::cout << "\n\n";
+    std::string item = "chicken nuggies";
+    bool wasRemoved = burgers.RemoveMenuItem(item);
+    if (wasRemoved)  std::cout << item << " was removed from the menu. Try McDonald's!\n";
+    else             std::cout << item << " was not found on the menu.\n";
+    std::cout << "\n\n";
+    burgers.ShowMenu();
+    //DataReader dataReader;
     //
     // CHALLENGE: call the DrawData method on the DataReader instance (dataReader)
     //
@@ -59,7 +75,9 @@ int main()
 
     //calling a non-static method, use the variable...
     Calculator t1000;
-    int diff = t1000.minus(7, 2);
+    int n1 = 7, n2 = 2;
+    int diff = t1000.minus(n1, n2);
+    std::cout << "7 - 2 = " << diff << "\n";
 
 
     /*
@@ -99,6 +117,8 @@ int main()
     names.push_back("The Joker");
     names.push_back("Bane");
     names.push_back("Poison Ivy");
+
+    names.erase(names.begin() + 5);
 
 
     /*
