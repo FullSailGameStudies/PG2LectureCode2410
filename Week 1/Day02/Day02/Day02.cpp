@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "FullSailCourse.h"
 
 bool postFix(std::string& hero)
 {
@@ -36,8 +37,39 @@ void printInfo(const std::vector<int>& scores)
     std::cout << "size: " << scores.size() << "\tcapacity: " << scores.capacity() << "\n";
 }
 
+int sum(const int& number1,const int& number2)
+{
+    return number1 + number2;
+}
+void RandomNumbers(int& random1, int& random2)
+{
+    random1 = rand();
+    random2 = rand() % 1000;
+}
+
+void GetGrades(std::vector<float>& gradesToFill)
+{
+    for (size_t i = 0; i < 10; i++)
+    {
+        gradesToFill.push_back(rand() % 10001 / 100.0);
+    }
+}
+
 int main()
 {
+    int r1, r2;
+    RandomNumbers(r1, r2);
+
+    int result = sum(5, 2);
+    int n1 = 5, n2 = 2;
+    result = sum(n1, n2);
+    int n3 = 7, n4 = 10;
+    result = sum(n3, n4);
+    int& n5 = n1;//n5 is an alias n1
+    n5 *= 3;
+    std::cout << n1 << "\n";
+    std::cout << &n1 << "\n" << &n5 << "\n";
+    std::cin.get();
     /*
         ╔══════════════════════════════╗
         ║Parameters: Pass by Reference.║
@@ -59,9 +91,14 @@ int main()
             Write a method to fill the vector of floats with grades.
             1) pass it in by reference
             2) add 10 grades to the vector
+            3) print the vector after calling the method
 
     */
     std::vector<float> grades;
+    FullSailCourse pg2;
+    pg2.GetGrades(grades);
+    pg2.ShowGrades(grades);
+    std::cin.get();
 
 
 
