@@ -34,6 +34,9 @@ void print(const std::vector<int>& scores)
 
 void printInfo(const std::vector<int>& scores)
 {
+    //size: # of items added to a vector
+    //capacity: length of the internal array
+    //size is ALWAYS <= capacity
     std::cout << "size: " << scores.size() << "\tcapacity: " << scores.capacity() << "\n";
 }
 
@@ -111,8 +114,13 @@ int main()
         This is the way you pass by reference and prevent the method from changing the variable.
     */
     std::vector<int> highScores;
-    for (int i = 0; i < 10; ++i)
-        highScores.push_back(rand());
+    highScores.reserve(10);
+    printInfo(highScores);//size: 0?  capacity: 0? 10?
+    for (int i = 0; i < 20; ++i)
+    {
+        highScores.push_back(rand() % 5000);
+        printInfo(highScores);//size:  capacity: 
+    }
     float avg = average(highScores);
 
 
@@ -145,14 +153,6 @@ int main()
     */
     print(highScores);
 
-    for (size_t i = 0; i < highScores.size();)
-    {
-        if (highScores[i] < 2500)
-            highScores.erase(highScores.begin() + i);
-        else
-            ++i;
-    }
-
 
     /*
         INTERMEDIATE LEVEL...
@@ -165,6 +165,43 @@ int main()
     */
 
 
+    std::cout << "\nBEFORE ERASE\n";
+    print(highScores);
+    //for (int i = highScores.size()-1; i >= 0; i--)
+    //{
+    //    if (highScores.at(i) < 2500)
+    //    {
+    //        highScores.erase(highScores.begin() + i);
+    //    }
+    //}
+    //for (int i = 0; i < highScores.size(); i++)
+    //{
+    //    if (highScores.at(i) < 2500)
+    //    {
+    //        highScores.erase(highScores.begin() + i);
+    //        i--;
+    //    }
+    //}
+    //for (int i = 0; i < highScores.size();)
+    //{
+    //    if (highScores.at(i) < 2500)
+    //    {
+    //        highScores.erase(highScores.begin() + i);
+    //    }
+    //    else
+    //        i++;
+    //}
+    for (std::vector<int>::iterator iter = highScores.begin();iter != highScores.end();)
+    {
+        if (*iter < 2500)
+            iter = highScores.erase(iter);
+        else
+            iter++;
+    }
+    for(;;){}
+    while (true) {}
+
+    std::cout << "\nAFTER ERASE\n";
     print(highScores);
 
 
