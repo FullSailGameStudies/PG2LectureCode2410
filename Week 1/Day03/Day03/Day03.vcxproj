@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Shared\Console\Console.cpp" />
     <ClCompile Include="Day03.cpp" />
+    <ClCompile Include="ThemeSong.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Shared\Console\Console.h" />
+    <ClInclude Include="ThemeSong.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
