@@ -25,6 +25,50 @@ unsigned long factorial(unsigned int N)
     if (N <= 1) return 1; //here's the exit condition!
     return N * factorial(N - 1);
 }
+/*
+        procedure bubbleSort(A : list of sortable items)
+              n := length(A)
+              repeat
+                  swapped := false
+                  for i := 1 to n - 1 inclusive do
+                      if A[i - 1] > A[i] then
+                          swap(A, i - 1, i)
+                          swapped = true
+                      end if  }
+                  end for  }
+                  n := n - 1
+              while swapped
+            end procedure  }
+*/
+//procedure bubbleSort(A : list of sortable items)
+void bubbleSort(std::vector<std::string>& A)
+{
+    //n := length(A)
+    int n = A.size();
+    bool swapped;
+    do //repeat
+    {
+        swapped = false;
+        //for i := 1 to n - 1 inclusive do
+        for (int i = 1; i <= n-1; i++)
+        {
+            //if A[i - 1] > A[i] then
+            if (A[i - 1] > A[i])
+            {
+                //swap(A, i - 1, i)
+                //std::string temp = A[i - 1];
+                //A[i - 1] = A[i];
+                //A[i] = temp;
+
+                std::swap(A[i - 1], A[i]);
+                swapped = true;
+            }
+        }
+        //n := n - 1
+        n = n - 1;
+    } while (swapped);//while swapped
+
+}//end procedure
 
 int main()
 {
@@ -39,7 +83,7 @@ int main()
 
     */
     int N = 0;
-    recursiveLoop(N);
+    //recursiveLoop(N);
 
 
     /*
@@ -140,7 +184,14 @@ int main()
     std::vector<std::string> names = { "Wonder Woman", "Superman", "Batman", "Flash", "Aquaman" };
     //call your BubbleSort on the names vector.
 
+    std::cout << "\nUnsorted...\n";
+    //print the sorted vector.
+    for (auto& name : names)
+        std::cout << name << "\n";
 
+    bubbleSort(names);
+
+    std::cout << "\nSorted...\n";
     //print the sorted vector.
     for (auto& name : names)
         std::cout << name << "\n";
