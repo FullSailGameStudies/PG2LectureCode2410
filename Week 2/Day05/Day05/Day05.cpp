@@ -61,6 +61,56 @@ int main()
         1) using the insert method.
         2) using [key] = value
     */
+    std::map<std::string, double> menu;
+    menu["Burger"] = 4.99;
+    menu["Chicken Fries"] = 3.99;
+    menu["Chicken Fries"] = 5.99;//overwrite the value
+    std::cout << menu["Sausage McGriddle"] << "\n";
+
+    std::pair< std::string, double> menuPair =
+        std::make_pair("Fried Banana", 1.99);
+    auto result =  menu.insert(menuPair);
+    //first is the iterator
+    //second is a bool
+
+    std::cout << "\nMcKing\n";
+    for (auto mapIter = menu.begin(); mapIter != menu.end(); mapIter++)
+    {
+        //first = key
+        //second = value
+        std::cout << mapIter->first << " " << mapIter->second << "\n";
+    }
+    std::cout << "\nMcKing\n";
+    for (auto& [menuItem,menuPrice] : menu)
+    {
+        std::cout << menuItem << " " << menuPrice << "\n";
+    }
+
+    std::string itemToFind = "Sausage McGriddle";
+    auto findResult = menu.find(itemToFind);
+    if (findResult == menu.end())
+        std::cout << itemToFind << " was not on the menu.\n";
+    else
+    {
+        double itemPrice = findResult->second;
+        menu[itemToFind] = 4.99;//update the value
+        findResult->second = 7.99;//update the value
+        std::cout << itemToFind << " used to costs " << itemPrice << "\n";
+        std::cout << "Now it costs " << menu[itemToFind] << "! Thanks Putin!\n";
+
+        menu.erase(findResult);
+        std::cout << "McGriddle ERASED!\n";
+    }
+    std::cin.get();
+    //erase(key)
+    //erase(iterator)
+    size_t eraseResult = menu.erase("Chicken Fries");
+    if (eraseResult > 0)
+        std::cout << "The item was removed.\n";
+    else
+        std::cout << "The item was not found.\n";
+
+
     std::map<Weapon, int> dorasBackpack;//will store the counts of each kind of weapon
 
     //returns an iterator and a bool. 

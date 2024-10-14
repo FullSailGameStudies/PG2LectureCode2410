@@ -17,7 +17,23 @@ std::string toUpper(const std::string& original)
 
 void recursiveLoop(int N)
 {
-    recursiveLoop(N + 1);
+    //exit conditions
+    if (N > 100) return;
+
+    {
+        std::cout << N << "\n";
+        recursiveLoop(N + 1);
+        std::cout << N << "\n";
+    }
+}
+
+void Bats(int i = 0)
+{
+    if (i < 100)
+    {
+        std::cout << (char)78 << (char)65 << ' ';
+        Bats(i+1);
+    }
 }
 
 unsigned long factorial(unsigned int N)
@@ -83,7 +99,7 @@ int main()
 
     */
     int N = 0;
-    //recursiveLoop(N);
+    recursiveLoop(N);
 
 
     /*
@@ -98,7 +114,7 @@ int main()
             }
     */
     //call Bats here.
-
+    Bats();
     char c[] = { '\n', 66, 65, 84, 77, 65, 78, 33, 33 };
     for (auto ch : c) std::cout << ch;
 
