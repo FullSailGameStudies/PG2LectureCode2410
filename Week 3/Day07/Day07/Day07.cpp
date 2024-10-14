@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include "Sword.h"
 
 
 /*              CLASSESS
@@ -44,10 +45,8 @@
 
 int main()
 {
-    /*
-        Lecture code: add a Car class
-    
-    */
+    Sword sting;//this is calling the Sword constructor
+    double dmg = sting.CalculateDamage(5);
 
     /*
         CHALLENGE:
