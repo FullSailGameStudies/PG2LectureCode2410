@@ -56,9 +56,13 @@ int main()
 	
 	*/
 	Pistol pewpew(50, 100, 10, 20);
+	Pistol p2(50, 100, 10, 20);
 
+	int rounds = pewpew.Rounds();//which Rounds method to call?
+	pewpew.Rounds(15);//which Rounds method to call?
+	pewpew.Rounds("20");//which Rounds method to call?
 
-
+	Pistol p50 = pewpew + p2;
 
 
 

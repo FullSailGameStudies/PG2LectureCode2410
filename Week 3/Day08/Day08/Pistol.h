@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include <string>
 class Pistol : public Weapon
 {
 public:
@@ -9,10 +10,22 @@ public:
 	{
 	}
 
+	Pistol operator+(const Pistol& otherGun)
+	{
+		int newROunds = rounds_ + otherGun.Rounds();
+		int newCapacity = std::max<int>(magCapacity_, otherGun.MagCapacity());
+		Pistol newGun(range(), damage(), newROunds, newCapacity);
+		return newGun;
+	}
+
 	int Rounds() const { return rounds_; }
 	void Rounds(int newRounds) {
 		if (newRounds >= 0 && newRounds <= magCapacity_)
 			rounds_ = newRounds;
+	}
+	void Rounds(std::string roundsString)
+	{
+
 	}
 
 	int MagCapacity() const { return magCapacity_; }
