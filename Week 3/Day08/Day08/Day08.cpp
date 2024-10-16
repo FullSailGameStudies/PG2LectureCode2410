@@ -6,10 +6,13 @@
 #include "Inheritance.h"
 #include "Polymorphism.h"
 #include "Car.h"
+#include "FlyingCar.h"
+#include "Pistol.h"
 
 
 int main()
 {
+	FlyingCar cyberPlane(2025,"Tesla","CyberPlane",500,200);
 	/*
         ╔═══════════════╗
         ║  Inheritance  ║
@@ -52,6 +55,7 @@ int main()
             Add a constructor that calls the base constructor
 	
 	*/
+	Pistol pewpew(50, 100, 10, 20);
 
 
 
