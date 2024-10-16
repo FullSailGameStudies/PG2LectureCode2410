@@ -8,11 +8,25 @@
 #include "Car.h"
 #include "FlyingCar.h"
 #include "Pistol.h"
+#include <vector>
 
 
 int main()
 {
+	Car myRide(1988, "Ford", "Mustang GT 5.0");
 	FlyingCar cyberPlane(2025,"Tesla","CyberPlane",500,200);
+
+	//std::cout << myRide.vehicleInformation() << "\n";
+	//std::cout << cyberPlane.vehicleInformation() << "\n";
+
+	std::vector<Car> garage;
+	garage.push_back(myRide);
+	garage.push_back(cyberPlane);//what happens here?? copies the CAR parts to an object in the vector
+
+	for (auto& car : garage)
+	{
+		std::cout << car.vehicleInformation() << "\n";
+	}
 	/*
         ╔═══════════════╗
         ║  Inheritance  ║

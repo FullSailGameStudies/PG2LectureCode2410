@@ -7,6 +7,7 @@ public:
 	//code snippets
 	FlyingCar(int year, std::string make, std::string model, int maxAlt, int maxSpeed);
 
+	std::string vehicleInformation() const override;//overriding the base version
 private:
 	int maxAltitude_, maxAirspeed_;
 };
