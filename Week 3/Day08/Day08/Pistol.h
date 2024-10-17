@@ -10,6 +10,8 @@ public:
 	{
 	}
 
+	int calcDamage() override;
+
 	Pistol operator+(const Pistol& otherGun)
 	{
 		int newROunds = rounds_ + otherGun.Rounds();
