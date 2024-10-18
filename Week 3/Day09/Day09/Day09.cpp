@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <vector>
 
 
 class base
@@ -13,7 +14,7 @@ public:
 	{
 
 	}
-	void print()
+	virtual void print()
 	{
 		std::cout << "Hello base " << mNum << "\n";
 	}
@@ -24,13 +25,65 @@ class derived : public base
 private:
 	std::string mStr;
 public:
-	derived(std::string str, int num) : base(num), mStr(str)
+	derived(std::string str, int num) : 
+		base(num), 
+		mStr(str)
 	{ }
+
+	void print() override
+	{
+		base::print();//EXTEND the base
+		std::cout << "\tHello derived " << mStr << "\n";
+	}
 };
 
 
 int main()
 {
+	int num = 5;//stack variable
+	int* pNum = &num;
+	std::cout << &num << "\n" << pNum << "\n";
+	std::cout << num << "\n" << *pNum << "\n";
+
+	{
+		int* pHeapNum = new int(5);//Heap variable
+		delete pHeapNum;//release the heap space to be used for something else
+	}//pHeapNum variable is gone 
+
+	base b1(5);//stack instance
+	base* pBase = new base(10);//heap instance
+	base* pBase2 = pBase;
+	pBase->print();
+	(*pBase).print();
+	delete pBase;//clean up the heap
+	pBase = nullptr;
+	//pBase2->print();
+
+	if(pBase != nullptr)
+		pBase->print();
+
+	{
+		std::vector<base*> bases;
+		bases.push_back(new base(10));
+		bases.push_back(new derived("PG2", 20));
+		for (auto& ptrBase : bases)
+		{
+			ptrBase->print();//runtime polymorphism
+		}
+
+		for (size_t i = 0; i < bases.size(); i++)
+		{
+			delete bases[i];
+		}
+	}
+
+	int iNum = 10;
+	long lNum = iNum;//implicit cast
+	iNum = lNum;
+	double dNum = 10;
+	iNum = (int)dNum;//explicit cast
+
+	std::cin.get();
 
 	/*
 		╔════════════╗
@@ -65,10 +118,36 @@ int main()
 			use std::move to upcast it to a base
 	*/
 	derived der1("Gotham", 1);
-	base base1 = der1; //calls the assignment operator of base therefore you lose all the derived parts. base1 is JUST a base object.
+	//calls the assignment operator of base therefore you lose all the derived parts. 
+	// base1 is JUST a base object.
+	base base1 = der1; 
 	der1.print();
 	std::cout << "\n";
 	base1.print();
+
+	std::unique_ptr<base> uPtrBase = 
+		std::make_unique<base>(420);
+
+	uPtrBase->print();
+
+	std::unique_ptr<base> uPtrBase2 = std::move(uPtrBase);//reassign ownership
+
+	{
+		std::vector<std::unique_ptr<base>> uPtrBases;
+		uPtrBases.push_back(std::move(uPtrBase2));
+		uPtrBases.push_back(std::make_unique<base>(420));
+		uPtrBases.push_back(std::make_unique<derived>("The Answer", 42));
+		std::cout << "\n\nUnique Ptrs\n";
+		for (auto& uPtr : uPtrBases)
+		{
+			uPtr->print();
+		}
+	}
+	//uPtrBase->print();
+
+	//Severity	Code	Description	Project	File	Line	Suppression State	Details
+	//Error	C2280	'std::unique_ptr<base,std::default_delete<base>>::unique_ptr(const std::unique_ptr<base,std::default_delete<base>> &)': attempting to reference a deleted function	Day09	C : \Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.40.33807\include\xmemory	700
+
 
 
 
