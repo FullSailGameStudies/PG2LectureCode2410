@@ -9,16 +9,31 @@ class base
 {
 private:
 	int mNum;
+	static int numberOfBases_;//value shared by ALL instances of base
 public:
 	base(int num) : mNum(num)
 	{
-
+		numberOfBases_++;
 	}
-	virtual void print()
+	//non-static method
+	//	has a hidden parameter called 'this'
+	//	can access non-static AND static members
+	virtual void print()//base* this)
 	{
 		std::cout << "Hello base " << mNum << "\n";
+		std::cout << "Number of bases: " << numberOfBases_ << "\n";
+	}
+	//static method
+	//	they do NOT have a 'this' parameter
+	//	can ONLY access other static members(fields and methods)
+	//	cannot access non-static members (fields and methods)
+	static void BaseReport()
+	{
+		//std::cout << "Hello base " << mNum << "\n";
+		std::cout << "Number of bases: " << numberOfBases_ << "\n";
 	}
 };
+int base::numberOfBases_ = 0;//initialize static fields outside of class
 
 class derived : public base
 {
@@ -40,6 +55,7 @@ public:
 
 int main()
 {
+	std::cout << (int)'1' << "\n";
 	int num = 5;//stack variable
 	int* pNum = &num;
 	std::cout << &num << "\n" << pNum << "\n";
@@ -51,12 +67,15 @@ int main()
 	}//pHeapNum variable is gone 
 
 	base b1(5);//stack instance
+	b1.print();
 	base* pBase = new base(10);//heap instance
 	base* pBase2 = pBase;
 	pBase->print();
 	(*pBase).print();
 	delete pBase;//clean up the heap
 	pBase = nullptr;
+
+	base::BaseReport();
 	//pBase2->print();
 
 	if(pBase != nullptr)
@@ -64,8 +83,8 @@ int main()
 
 	{
 		std::vector<base*> bases;
-		bases.push_back(new base(10));
-		bases.push_back(new derived("PG2", 20));
+		bases.push_back(new base(15));
+		bases.push_back(new derived("PG2", 25));
 		for (auto& ptrBase : bases)
 		{
 			ptrBase->print();//runtime polymorphism
@@ -135,7 +154,7 @@ int main()
 	{
 		std::vector<std::unique_ptr<base>> uPtrBases;
 		uPtrBases.push_back(std::move(uPtrBase2));
-		uPtrBases.push_back(std::make_unique<base>(420));
+		uPtrBases.push_back(std::make_unique<base>(425));
 		uPtrBases.push_back(std::make_unique<derived>("The Answer", 42));
 		std::cout << "\n\nUnique Ptrs\n";
 		for (auto& uPtr : uPtrBases)
